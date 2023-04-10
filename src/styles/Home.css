@@ -25,6 +25,7 @@
   width: 300px;
   background-color: antiquewhite;
   color: black;
+  cursor: pointer;
 }
 
 .Movie-image {

@@ -9,13 +9,18 @@ import ButtonRegis from "../components/ButtonRegis";
 import backgroundImage from "../styles/image.jpg";
 import { useEffect, useState } from "react";
 import { getMovieList, searchMovie } from "../api";
+import { useNavigate } from "react-router-dom";
+
+
 
 const Home = () => {
+  const nav = useNavigate()
   const [popularMovies, setPopularMovies] = useState([]);
 
   useEffect(() => {
     getMovieList().then((result) => {
       setPopularMovies(result);
+
     });
   }, []);
 
@@ -29,14 +34,12 @@ const Home = () => {
   const PopularMovieList = () => {
     return popularMovies.map((movie, i) => {
       return (
-        <div className="Movie-wrapper" key={i}>
-          {/* <div className="Movie-title">{movie.title}</div> */}
+        <div className="Movie-wrapper" key={i} onClick={()=>{nav(`/detail/${movie.id}`)}}>
           <img
             className="Movie-image"
             src={`${process.env.REACT_APP_BASEIMGURL}/${movie.poster_path}`}
+            alt={i}
           />
-          {/* <div className="Movie-date">release : {movie.release_date}</div>
-          <div className="Movie-rate">{movie.vote_average}</div> */}
         </div>
       );
     });
